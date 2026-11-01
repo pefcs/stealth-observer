@@ -1,3 +1,9 @@
+## 0.1.11
+
+- Exposes `game.modules.get("stealth-observer").api.getPerceptionRollAdjustment(actorOrToken, skillId)` for roll managers that need to preserve the lighting-based Perception rule after their own roll-mode selection.
+- The public API uses the same configured Perception skill, local Midi-QOL light exposure, and Vision 5e detection-mode/range calculation as Stealth Observer's native Perception pre-roll hook.
+- Keeps the existing `dnd5e.preRollSkill` modifier for ordinary rolls; this API is an additional integration point for modules that reconfigure D20 rolls after the D&D hook.
+
 ## 0.1.10
 
 - Fixed lighting-based disadvantage on active Perception checks for D&D 5e 6.x. The pre-roll handler now reads the modern `(config, dialog, message)` hook signature and resolves the rolling Actor from `config.subject`.
