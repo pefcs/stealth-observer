@@ -42,7 +42,7 @@ Hooks.once("ready", () => {
     return;
   }
   registerMidiVisibilityIntegration();
-  game.modules.get(MODULE_ID).api = { getActionHUDReadouts };
+  game.modules.get(MODULE_ID).api = { getActionHUDReadouts, getPerceptionRollAdjustment };
   Hooks.on("dnd5e.preRollSkill", onPreRollSkill);
   Hooks.on("dnd5e.rollSkill", onRollSkill);
   Hooks.on("midi-qol.preItemRoll", onPreItemRoll);
@@ -303,6 +303,36 @@ function onPreRollSkill(config = {}, dialog = {}, message = {}) {
     resultingDisadvantage: rollConfig.disadvantage === true
   });
 }
+/**
+ * Public integration API for roll managers that need to apply the lighting
+ * rule to Perception checks after their own mode-selection UI.
+ *
+ * @param {Actor|Token|TokenDocument} actorOrToken
+ * @param {string} skillId
+ * @returns {{ applies: boolean, disadvantage: boolean, exposure?: string, exposureSource?: string, tokenUuid?: string|null, reason?: string }}
+ */
+function getPerceptionRollAdjustment(actorOrToken, skillId) {
+  const configuredSkill = skillKey("perceptionSkill");
+  if (skillId !== configuredSkill) {
+    return { applies: false, disadvantage: false, reason: "not-perception" };
+  }
+  if (!game.settings.get(MODULE_ID, "activePerceptionDisadvantage")) {
+    return { applies: true, disadvantage: false, reason: "setting-disabled" };
+  }
+  const tokenDoc = tokenDocument(actorOrToken) ?? tokenForActor(actorOrToken);
+  if (!tokenDoc) {
+    return { applies: true, disadvantage: false, reason: "no-scene-token" };
+  }
+  const exposure = tokenExposureDetails(tokenDoc);
+  return {
+    applies: true,
+    disadvantage: needsPerceptionDisadvantage(tokenDoc),
+    exposure: exposure.level,
+    exposureSource: exposure.source,
+    tokenUuid: tokenDoc.uuid ?? null
+  };
+}
+
 function needsPerceptionDisadvantage(tokenDoc) {
   const exposure = tokenExposure(tokenDoc);
   if (exposure === "bright" || exposure === "unknown") return false;
