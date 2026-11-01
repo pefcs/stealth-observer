@@ -2,7 +2,7 @@
   "id": "stealth-observer",
   "title": "Stealth Observer",
   "description": "Stores Stealth and Perception results, displays icon-only readouts in Token HUD or Action HUD, and integrates per-observer hiding with Midi-QOL.",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "compatibility": {
     "minimum": "14",
     "verified": "14"
