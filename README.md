@@ -1,3 +1,14 @@
+## Active Perception in poor lighting (0.1.10)
+
+When **Apply disadvantage to Perception in poor lighting** is enabled (default), active Perception skill checks use the rolling token's own local light exposure and applicable vision modes:
+
+- Bright light: no lighting-based disadvantage.
+- Dim light: disadvantage unless darkvision is available in range, or the actor has a stronger relevant sight mode.
+- Darkness: disadvantage unless Devil's Sight, truesight, blindsight, or another eligible precise sight mode is available in range. Ordinary darkvision does not remove the disadvantage in darkness.
+- Unknown exposure: no additional disadvantage is imposed, avoiding a false penalty when the lighting API cannot classify the token.
+
+The modifier is applied through the D&D 5e 6.x `dnd5e.preRollSkill` hook. Existing advantage is not removed: advantage and the lighting-based disadvantage cancel according to the system's normal rules. Existing disadvantage is preserved. The setting can be disabled independently of passive Perception's lighting adjustments.
+
 # Stealth Observer
 
 A Foundry VTT module for D&D 5e 6.x and Foundry v14, with Midi-QOL per-observer hiding integration.
