@@ -1,3 +1,7 @@
+## Roll-manager integration API (0.1.11)
+
+Stealth Observer exposes `game.modules.get("stealth-observer").api.getPerceptionRollAdjustment(actorOrToken, skillId)`. The method returns whether the supplied skill is the configured Perception skill and whether current local lighting/vision requires disadvantage. Roll managers can call this after selecting their own roll mode so they do not accidentally remove the environmental Perception penalty while reconfiguring the D20 roll.
+
 ## Active Perception in poor lighting (0.1.10)
 
 When **Apply disadvantage to Perception in poor lighting** is enabled (default), active Perception skill checks use the rolling token's own local light exposure and applicable vision modes:
