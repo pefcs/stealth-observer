@@ -1,3 +1,11 @@
+## 0.1.10
+
+- Fixed lighting-based disadvantage on active Perception checks for D&D 5e 6.x. The pre-roll handler now reads the modern `(config, dialog, message)` hook signature and resolves the rolling Actor from `config.subject`.
+- Uses the D&D 5e 6.x `disadvantage` roll-configuration flag rather than the obsolete `advantageMode` property.
+- Preserves any existing advantage or disadvantage source. Lighting disadvantage cancels an existing advantage using D&D's normal rule; existing disadvantage remains disadvantage.
+- Uses the rolling token's local exposure and in-range vision modes: dim light imposes disadvantage without darkvision or a stronger sense; darkness imposes disadvantage unless the actor has Devil's Sight, truesight, blindsight, or another eligible precise sight mode. Ordinary darkvision does not remove disadvantage in darkness.
+- The existing **Apply disadvantage to Perception in poor lighting** setting controls this behavior and remains enabled by default.
+
 # Changelog
 
 ## 0.1.2
