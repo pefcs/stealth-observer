@@ -28,7 +28,7 @@ Hooks.once("init", () => {
   register("endOnAttack", { name: "End hiding when making an attack", scope: "world", config: true, type: Boolean, default: true });
   register("endOnVerbalSpell", { name: "End hiding when casting a verbal spell", scope: "world", config: true, type: Boolean, default: true });
   register("bankActivePerception", { name: "Bank active Perception checks", scope: "world", config: true, type: Boolean, default: true });
-  register("activePerceptionDisadvantage", { name: "Apply disadvantage to Perception in poor lighting", hint: "Applies a second-die disadvantage when the detecting token is in dim light or darkness and lacks suitable vision.", scope: "world", config: true, type: Boolean, default: true });
+  register("activePerceptionDisadvantage", { name: "Apply disadvantage to Perception in poor lighting", hint: "Applies disadvantage to Perception checks when the rolling token is in dim light without darkvision, or in darkness without a stronger sense such as Devil’s Sight, truesight, or blindsight.", scope: "world", config: true, type: Boolean, default: true });
   register("debug", { name: "Debug logging", scope: "client", config: true, type: Boolean, default: false });
 });
 
@@ -245,17 +245,63 @@ function onUpdateActiveEffect(effect, changes = {}) {
     void removeHiding(actor, tokenForActor(actor), "Hiding condition disabled");
   }
 }
-function onPreRollSkill(actor, config = {}) {
+function onPreRollSkill(config = {}, dialog = {}, message = {}) {
   if (!game.settings.get(MODULE_ID, "activePerceptionDisadvantage")) return;
-  const skill = config.skill ?? config.skillId;
+
+  // D&D 5e 6.x pre-roll hooks use (config, dialog, message). The roll
+  // configuration carries the skill and the rolling Actor as `subject`.
+  // Keep the fallback shape for older integrations that passed (actor, config).
+  let rollConfig = config;
+  let actor = config?.subject ?? config?.actor ?? null;
+  let skill = config?.skill ?? config?.skillId;
+  if (!actor && config?.documentName === "Actor") {
+    actor = config;
+    rollConfig = dialog ?? {};
+    skill = rollConfig.skill ?? rollConfig.skillId ?? message?.skillId;
+  }
+
   if (skill !== skillKey("perceptionSkill")) return;
+  if (!actor) {
+    debug("Could not identify Actor on Perception pre-roll configuration", {
+      skill, configKeys: Object.keys(rollConfig ?? {})
+    });
+    return;
+  }
+
   const tokenDoc = tokenForActor(actor);
-  if (!tokenDoc || !needsPerceptionDisadvantage(tokenDoc)) return;
-  // D&D 5e 6.x roll configuration accepts advantageMode ("adv", "dis", "normal").
-  // Keep any pre-existing disadvantage; this is an additional source of disadvantage.
-  config.advantageMode = config.advantageMode === "adv" ? "normal" : "dis";
-  config.disadvantage = true;
-  debug("Applying lighting-based Perception disadvantage", actor.name);
+  if (!tokenDoc) {
+    debug("No scene token found for lighting-based Perception disadvantage", actor.name);
+    return;
+  }
+
+  const exposure = tokenExposureDetails(tokenDoc);
+  if (!needsPerceptionDisadvantage(tokenDoc)) {
+    debug("Perception roll has no lighting disadvantage", actor.name, {
+      token: tokenDoc.name, exposure: exposure.level, exposureSource: exposure.source,
+      rawExposure: exposure.raw
+    });
+    return;
+  }
+
+  // D&D 5e 6.x uses independent advantage/disadvantage booleans. Add
+  // disadvantage without clearing advantage: if both are present, the system's
+  // normal cancellation rule produces a straight roll. Existing disadvantage is
+  // left in place, and the roll still uses only the system's ordinary two-die cap.
+  const hadAdvantage = rollConfig.advantage === true;
+  const hadDisadvantage = rollConfig.disadvantage === true;
+  rollConfig.disadvantage = true;
+
+  debug("Applying lighting-based Perception disadvantage", {
+    actor: actor.name,
+    token: tokenDoc.name,
+    exposure: exposure.level,
+    exposureSource: exposure.source,
+    rawExposure: exposure.raw,
+    hadAdvantage,
+    hadDisadvantage,
+    resultingAdvantage: rollConfig.advantage === true,
+    resultingDisadvantage: rollConfig.disadvantage === true
+  });
 }
 function needsPerceptionDisadvantage(tokenDoc) {
   const exposure = tokenExposure(tokenDoc);
