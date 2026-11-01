@@ -1,0 +1,32 @@
+{
+  "id": "stealth-observer",
+  "title": "Stealth Observer",
+  "description": "Stores Stealth and Perception results, displays icon-only readouts in Token HUD or Action HUD, and integrates per-observer hiding with Midi-QOL.",
+  "version": "0.1.9",
+  "compatibility": {
+    "minimum": "14",
+    "verified": "14"
+  },
+  "authors": [
+    {
+      "name": "OpenAI"
+    }
+  ],
+  "esmodules": [
+    "scripts/stealth-observer.js"
+  ],
+  "relationships": {
+    "requires": [
+      {
+        "id": "lib-wrapper",
+        "type": "module"
+      }
+    ]
+  },
+  "url": "",
+  "manifest": "",
+  "download": "",
+  "styles": [
+    "styles/stealth-observer.css"
+  ]
+}

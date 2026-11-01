@@ -1,0 +1,672 @@
+/* Compact, readable readouts attached to the Token HUD side columns. */
+#token-hud .stealth-observer-hud-group,
+.token-hud .stealth-observer-hud-group {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: max-content;
+  max-width: 132px;
+  min-height: 27px;
+  margin: 3px 0;
+  padding: 4px 7px;
+  color: var(--color-text-light-6, #eee);
+  background: rgba(24, 31, 35, 0.94);
+  border: 1px solid rgba(117, 190, 177, 0.52);
+  border-radius: 6px;
+  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.45);
+  font-size: 12px;
+  line-height: 1;
+  white-space: nowrap;
+  vertical-align: middle;
+  z-index: 20;
+}
+
+#token-hud .stealth-observer-hud-group > i,
+.token-hud .stealth-observer-hud-group > i {
+  width: 13px;
+  text-align: center;
+  opacity: 0.9;
+}
+
+#token-hud .stealth-observer-hud-label,
+.token-hud .stealth-observer-hud-label {
+  color: rgba(235, 242, 240, 0.78);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.045em;
+}
+
+#token-hud .stealth-observer-hud-input,
+.token-hud .stealth-observer-hud-input {
+  box-sizing: border-box;
+  width: 3.1em;
+  min-width: 3.1em;
+  height: 1.45em;
+  margin: 0;
+  padding: 0 1px;
+  border: 0;
+  border-radius: 3px;
+  outline: none;
+  color: #f4f7f6;
+  background: rgba(255, 255, 255, 0.08);
+  text-align: center;
+  font-size: 1em;
+  font-weight: 800;
+  line-height: 1.2;
+  box-shadow: none;
+}
+
+#token-hud .stealth-observer-hud-input:focus,
+.token-hud .stealth-observer-hud-input:focus {
+  outline: 1px solid rgba(153, 224, 79, 0.9);
+  background: rgba(255, 255, 255, 0.13);
+}
+
+#token-hud .stealth-observer-hud-input.disabled,
+.token-hud .stealth-observer-hud-input.disabled {
+  opacity: 0.95;
+  cursor: default;
+}
+
+#token-hud .stealth-observer-hud-value,
+.token-hud .stealth-observer-hud-value {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.025em;
+}
+
+#token-hud .stealth-observer-exposure-bright > i,
+.token-hud .stealth-observer-exposure-bright > i { color: #f4d36e; }
+#token-hud .stealth-observer-exposure-dim > i,
+.token-hud .stealth-observer-exposure-dim > i { color: #d5bd83; }
+#token-hud .stealth-observer-exposure-dark > i,
+.token-hud .stealth-observer-exposure-dark > i { color: #b9a5f5; }
+#token-hud .stealth-observer-exposure-magical > i,
+.token-hud .stealth-observer-exposure-magical > i { color: #d18cff; }
+#token-hud .stealth-observer-exposure-unknown > i,
+.token-hud .stealth-observer-exposure-unknown > i { color: #b9c1c0; }
+
+
+/* Compact icon-only/value readouts: one footer after the built-in Token HUD controls. */
+#token-hud .stealth-observer-hud-footer,
+.token-hud .stealth-observer-hud-footer {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 5px;
+  width: max-content;
+  max-width: 180px;
+  margin: 5px 0 0;
+  padding: 2px 3px;
+  border-radius: 6px;
+  background: rgba(15, 20, 24, 0.62);
+}
+#token-hud .stealth-observer-hud-group,
+.token-hud .stealth-observer-hud-group {
+  gap: 4px;
+  width: auto;
+  min-width: 0;
+  max-width: none;
+  min-height: 26px;
+  margin: 0;
+  padding: 3px 5px;
+}
+#token-hud .stealth-observer-hud-label,
+.token-hud .stealth-observer-hud-label,
+#token-hud .stealth-observer-hud-value,
+.token-hud .stealth-observer-hud-value { display: none !important; }
+#token-hud .stealth-observer-exposure,
+.token-hud .stealth-observer-exposure { width: 28px; min-width: 28px; }
+
+/* Action HUD bridge: inserted into its character identity block, below hit dice. */
+#action-hud-root .stealth-observer-actionhud-readouts {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+  min-height: 25px;
+  margin-top: 5px;
+}
+#action-hud-root .stealth-observer-actionhud-readout {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-width: 27px;
+  height: 25px;
+  padding: 2px 6px;
+  color: var(--ahud-text, #e8eeee);
+  background: rgba(24, 31, 35, 0.78);
+  border: 1px solid rgba(117, 190, 177, 0.48);
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  font-size: 12px;
+  line-height: 1;
+}
+#action-hud-root .stealth-observer-actionhud-readout > i { font-size: 12px; opacity: .92; }
+#action-hud-root .stealth-observer-actionhud-readout input {
+  box-sizing: border-box;
+  width: 28px;
+  min-width: 28px;
+  height: 19px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  color: inherit;
+  background: transparent;
+  text-align: center;
+  font: inherit;
+  font-weight: 800;
+  box-shadow: none;
+}
+#action-hud-root .stealth-observer-actionhud-readout input.disabled { opacity: 1; cursor: default; }
+#action-hud-root .stealth-observer-exposure-bright > i { color: #f4d36e; }
+#action-hud-root .stealth-observer-exposure-dim > i { color: #d5bd83; }
+#action-hud-root .stealth-observer-exposure-dark > i { color: #b9a5f5; }
+#action-hud-root .stealth-observer-exposure-magical > i { color: #d18cff; }
+#action-hud-root .stealth-observer-exposure-unknown > i { color: #b9c1c0; }
+
+
+/* Token HUD: mirror Stealthy's bottom-left and bottom-right readout placement. */
+#token-hud .stealth-observer-token-readout,
+.token-hud .stealth-observer-token-readout {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  width: 58px;
+  min-width: 58px;
+  height: 36px;
+  min-height: 36px;
+  margin: 0;
+  padding: 2px 3px;
+  color: #f3f5f4;
+  background: rgba(25, 31, 35, .92);
+  border: 1px solid rgba(150, 190, 180, .36);
+  border-radius: 5px;
+  box-shadow: 0 2px 6px rgba(0,0,0,.35);
+}
+#token-hud .stealth-observer-token-readout > i,
+.token-hud .stealth-observer-token-readout > i {
+  flex: 0 0 14px;
+  width: 14px;
+  text-align: center;
+  font-size: 13px;
+}
+#token-hud .stealth-observer-token-input,
+.token-hud .stealth-observer-token-input {
+  box-sizing: border-box;
+  width: 32px;
+  min-width: 32px;
+  height: 25px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 3px;
+  color: #fff;
+  background: rgba(255,255,255,.08);
+  text-align: center;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1;
+  box-shadow: none;
+}
+#token-hud .stealth-observer-token-input.disabled,
+.token-hud .stealth-observer-token-input.disabled { opacity: .95; cursor: default; }
+#token-hud .stealth-observer-exposure,
+.token-hud .stealth-observer-exposure {
+  width: 36px;
+  min-width: 36px;
+  padding: 0;
+}
+#token-hud .stealth-observer-exposure > i,
+.token-hud .stealth-observer-exposure > i { font-size: 16px; }
+#token-hud .stealth-observer-exposure-bright > i,
+.token-hud .stealth-observer-exposure-bright > i { color: #f4d36e; }
+#token-hud .stealth-observer-exposure-dim > i,
+.token-hud .stealth-observer-exposure-dim > i { color: #d5bd83; }
+#token-hud .stealth-observer-exposure-dark > i,
+.token-hud .stealth-observer-exposure-dark > i { color: #b9a5f5; }
+#token-hud .stealth-observer-exposure-magical > i,
+.token-hud .stealth-observer-exposure-magical > i { color: #d18cff; }
+#token-hud .stealth-observer-exposure-unknown > i,
+.token-hud .stealth-observer-exposure-unknown > i { color: #b9c1c0; }
+
+/* Action HUD's native external-readout slot. */
+#action-hud-root .ahud-external-readouts {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  min-height: 0;
+  margin-top: 4px;
+}
+#action-hud-root .ahud-external-readouts:empty { display: none; }
+#action-hud-root .ahud-external-readout {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-width: 28px;
+  height: 23px;
+  padding: 2px 6px;
+  border: 1px solid rgba(117,190,177,.35);
+  border-radius: 5px;
+  color: var(--ahud-text, #e8eeee);
+  background: rgba(24,31,35,.76);
+  font-size: 12px;
+  line-height: 1;
+}
+#action-hud-root .ahud-external-readout i { font-size: 11px; }
+#action-hud-root .ahud-external-readout b { font-size: 12px; font-weight: 800; }
+#action-hud-root .stealth-observer-exposure-bright i { color: #f4d36e; }
+#action-hud-root .stealth-observer-exposure-dim i { color: #d5bd83; }
+#action-hud-root .stealth-observer-exposure-dark i { color: #b9a5f5; }
+#action-hud-root .stealth-observer-exposure-magical i { color: #d18cff; }
+#action-hud-root .stealth-observer-exposure-unknown i { color: #b9c1c0; }
+
+
+/* Token HUD: mirror Stealthy's bottom-left and bottom-right readout placement. */
+#token-hud .stealth-observer-token-readout,
+.token-hud .stealth-observer-token-readout {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  width: 58px;
+  min-width: 58px;
+  height: 36px;
+  min-height: 36px;
+  margin: 0;
+  padding: 2px 3px;
+  color: #f3f5f4;
+  background: rgba(25, 31, 35, .92);
+  border: 1px solid rgba(150, 190, 180, .36);
+  border-radius: 5px;
+  box-shadow: 0 2px 6px rgba(0,0,0,.35);
+}
+#token-hud .stealth-observer-token-readout > i,
+.token-hud .stealth-observer-token-readout > i {
+  flex: 0 0 14px;
+  width: 14px;
+  text-align: center;
+  font-size: 13px;
+}
+#token-hud .stealth-observer-token-input,
+.token-hud .stealth-observer-token-input {
+  box-sizing: border-box;
+  width: 32px;
+  min-width: 32px;
+  height: 25px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 3px;
+  color: #fff;
+  background: rgba(255,255,255,.08);
+  text-align: center;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1;
+  box-shadow: none;
+}
+#token-hud .stealth-observer-token-input.disabled,
+.token-hud .stealth-observer-token-input.disabled { opacity: .95; cursor: default; }
+#token-hud .stealth-observer-exposure,
+.token-hud .stealth-observer-exposure {
+  width: 36px;
+  min-width: 36px;
+  padding: 0;
+}
+#token-hud .stealth-observer-exposure > i,
+.token-hud .stealth-observer-exposure > i { font-size: 16px; }
+#token-hud .stealth-observer-exposure-bright > i,
+.token-hud .stealth-observer-exposure-bright > i { color: #f4d36e; }
+#token-hud .stealth-observer-exposure-dim > i,
+.token-hud .stealth-observer-exposure-dim > i { color: #d5bd83; }
+#token-hud .stealth-observer-exposure-dark > i,
+.token-hud .stealth-observer-exposure-dark > i { color: #b9a5f5; }
+#token-hud .stealth-observer-exposure-magical > i,
+.token-hud .stealth-observer-exposure-magical > i { color: #d18cff; }
+#token-hud .stealth-observer-exposure-unknown > i,
+.token-hud .stealth-observer-exposure-unknown > i { color: #b9c1c0; }
+
+/* Action HUD's native external-readout slot. */
+#action-hud-root .ahud-external-readouts {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  min-height: 0;
+  margin-top: 4px;
+}
+#action-hud-root .ahud-external-readouts:empty { display: none; }
+#action-hud-root .ahud-external-readout {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-width: 28px;
+  height: 23px;
+  padding: 2px 6px;
+  border: 1px solid rgba(117,190,177,.35);
+  border-radius: 5px;
+  color: var(--ahud-text, #e8eeee);
+  background: rgba(24,31,35,.76);
+  font-size: 12px;
+  line-height: 1;
+}
+#action-hud-root .ahud-external-readout i { font-size: 11px; }
+#action-hud-root .ahud-external-readout b { font-size: 12px; font-weight: 800; }
+#action-hud-root .stealth-observer-exposure-bright i { color: #f4d36e; }
+#action-hud-root .stealth-observer-exposure-dim i { color: #d5bd83; }
+#action-hud-root .stealth-observer-exposure-dark i { color: #b9a5f5; }
+#action-hud-root .stealth-observer-exposure-magical i { color: #d18cff; }
+#action-hud-root .stealth-observer-exposure-unknown i { color: #b9c1c0; }
+
+
+/* Token HUD: mirror Stealthy's bottom-left and bottom-right readout placement. */
+#token-hud .stealth-observer-token-readout,
+.token-hud .stealth-observer-token-readout {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  width: 58px;
+  min-width: 58px;
+  height: 36px;
+  min-height: 36px;
+  margin: 0;
+  padding: 2px 3px;
+  color: #f3f5f4;
+  background: rgba(25, 31, 35, .92);
+  border: 1px solid rgba(150, 190, 180, .36);
+  border-radius: 5px;
+  box-shadow: 0 2px 6px rgba(0,0,0,.35);
+}
+#token-hud .stealth-observer-token-readout > i,
+.token-hud .stealth-observer-token-readout > i {
+  flex: 0 0 14px;
+  width: 14px;
+  text-align: center;
+  font-size: 13px;
+}
+#token-hud .stealth-observer-token-input,
+.token-hud .stealth-observer-token-input {
+  box-sizing: border-box;
+  width: 32px;
+  min-width: 32px;
+  height: 25px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 3px;
+  color: #fff;
+  background: rgba(255,255,255,.08);
+  text-align: center;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1;
+  box-shadow: none;
+}
+#token-hud .stealth-observer-token-input.disabled,
+.token-hud .stealth-observer-token-input.disabled { opacity: .95; cursor: default; }
+#token-hud .stealth-observer-exposure,
+.token-hud .stealth-observer-exposure {
+  width: 36px;
+  min-width: 36px;
+  padding: 0;
+}
+#token-hud .stealth-observer-exposure > i,
+.token-hud .stealth-observer-exposure > i { font-size: 16px; }
+#token-hud .stealth-observer-exposure-bright > i,
+.token-hud .stealth-observer-exposure-bright > i { color: #f4d36e; }
+#token-hud .stealth-observer-exposure-dim > i,
+.token-hud .stealth-observer-exposure-dim > i { color: #d5bd83; }
+#token-hud .stealth-observer-exposure-dark > i,
+.token-hud .stealth-observer-exposure-dark > i { color: #b9a5f5; }
+#token-hud .stealth-observer-exposure-magical > i,
+.token-hud .stealth-observer-exposure-magical > i { color: #d18cff; }
+#token-hud .stealth-observer-exposure-unknown > i,
+.token-hud .stealth-observer-exposure-unknown > i { color: #b9c1c0; }
+
+/* Action HUD's native external-readout slot. */
+#action-hud-root .ahud-external-readouts {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  min-height: 0;
+  margin-top: 4px;
+}
+#action-hud-root .ahud-external-readouts:empty { display: none; }
+#action-hud-root .ahud-external-readout {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-width: 28px;
+  height: 23px;
+  padding: 2px 6px;
+  border: 1px solid rgba(117,190,177,.35);
+  border-radius: 5px;
+  color: var(--ahud-text, #e8eeee);
+  background: rgba(24,31,35,.76);
+  font-size: 12px;
+  line-height: 1;
+}
+#action-hud-root .ahud-external-readout i { font-size: 11px; }
+#action-hud-root .ahud-external-readout b { font-size: 12px; font-weight: 800; }
+#action-hud-root .stealth-observer-exposure-bright i { color: #f4d36e; }
+#action-hud-root .stealth-observer-exposure-dim i { color: #d5bd83; }
+#action-hud-root .stealth-observer-exposure-dark i { color: #b9a5f5; }
+#action-hud-root .stealth-observer-exposure-magical i { color: #d18cff; }
+#action-hud-root .stealth-observer-exposure-unknown i { color: #b9c1c0; }
+
+
+/* Token HUD: mirror Stealthy's bottom-left and bottom-right readout placement. */
+#token-hud .stealth-observer-token-readout,
+.token-hud .stealth-observer-token-readout {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  width: 58px;
+  min-width: 58px;
+  height: 36px;
+  min-height: 36px;
+  margin: 0;
+  padding: 2px 3px;
+  color: #f3f5f4;
+  background: rgba(25, 31, 35, .92);
+  border: 1px solid rgba(150, 190, 180, .36);
+  border-radius: 5px;
+  box-shadow: 0 2px 6px rgba(0,0,0,.35);
+}
+#token-hud .stealth-observer-token-readout > i,
+.token-hud .stealth-observer-token-readout > i {
+  flex: 0 0 14px;
+  width: 14px;
+  text-align: center;
+  font-size: 13px;
+}
+#token-hud .stealth-observer-token-input,
+.token-hud .stealth-observer-token-input {
+  box-sizing: border-box;
+  width: 32px;
+  min-width: 32px;
+  height: 25px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 3px;
+  color: #fff;
+  background: rgba(255,255,255,.08);
+  text-align: center;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1;
+  box-shadow: none;
+}
+#token-hud .stealth-observer-token-input.disabled,
+.token-hud .stealth-observer-token-input.disabled { opacity: .95; cursor: default; }
+#token-hud .stealth-observer-exposure,
+.token-hud .stealth-observer-exposure {
+  width: 36px;
+  min-width: 36px;
+  padding: 0;
+}
+#token-hud .stealth-observer-exposure > i,
+.token-hud .stealth-observer-exposure > i { font-size: 16px; }
+#token-hud .stealth-observer-exposure-bright > i,
+.token-hud .stealth-observer-exposure-bright > i { color: #f4d36e; }
+#token-hud .stealth-observer-exposure-dim > i,
+.token-hud .stealth-observer-exposure-dim > i { color: #d5bd83; }
+#token-hud .stealth-observer-exposure-dark > i,
+.token-hud .stealth-observer-exposure-dark > i { color: #b9a5f5; }
+#token-hud .stealth-observer-exposure-magical > i,
+.token-hud .stealth-observer-exposure-magical > i { color: #d18cff; }
+#token-hud .stealth-observer-exposure-unknown > i,
+.token-hud .stealth-observer-exposure-unknown > i { color: #b9c1c0; }
+
+/* Action HUD's native external-readout slot. */
+#action-hud-root .ahud-external-readouts {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  min-height: 0;
+  margin-top: 4px;
+}
+#action-hud-root .ahud-external-readouts:empty { display: none; }
+#action-hud-root .ahud-external-readout {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-width: 28px;
+  height: 23px;
+  padding: 2px 6px;
+  border: 1px solid rgba(117,190,177,.35);
+  border-radius: 5px;
+  color: var(--ahud-text, #e8eeee);
+  background: rgba(24,31,35,.76);
+  font-size: 12px;
+  line-height: 1;
+}
+#action-hud-root .ahud-external-readout i { font-size: 11px; }
+#action-hud-root .ahud-external-readout b { font-size: 12px; font-weight: 800; }
+#action-hud-root .stealth-observer-exposure-bright i { color: #f4d36e; }
+#action-hud-root .stealth-observer-exposure-dim i { color: #d5bd83; }
+#action-hud-root .stealth-observer-exposure-dark i { color: #b9a5f5; }
+#action-hud-root .stealth-observer-exposure-magical i { color: #d18cff; }
+#action-hud-root .stealth-observer-exposure-unknown i { color: #b9c1c0; }
+
+
+/* Token HUD: mirror Stealthy's bottom-left and bottom-right readout placement. */
+#token-hud .stealth-observer-token-readout,
+.token-hud .stealth-observer-token-readout {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  width: 58px;
+  min-width: 58px;
+  height: 36px;
+  min-height: 36px;
+  margin: 0;
+  padding: 2px 3px;
+  color: #f3f5f4;
+  background: rgba(25, 31, 35, .92);
+  border: 1px solid rgba(150, 190, 180, .36);
+  border-radius: 5px;
+  box-shadow: 0 2px 6px rgba(0,0,0,.35);
+}
+#token-hud .stealth-observer-token-readout > i,
+.token-hud .stealth-observer-token-readout > i {
+  flex: 0 0 14px;
+  width: 14px;
+  text-align: center;
+  font-size: 13px;
+}
+#token-hud .stealth-observer-token-input,
+.token-hud .stealth-observer-token-input {
+  box-sizing: border-box;
+  width: 32px;
+  min-width: 32px;
+  height: 25px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 3px;
+  color: #fff;
+  background: rgba(255,255,255,.08);
+  text-align: center;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1;
+  box-shadow: none;
+}
+#token-hud .stealth-observer-token-input.disabled,
+.token-hud .stealth-observer-token-input.disabled { opacity: .95; cursor: default; }
+#token-hud .stealth-observer-exposure,
+.token-hud .stealth-observer-exposure {
+  width: 36px;
+  min-width: 36px;
+  padding: 0;
+}
+#token-hud .stealth-observer-exposure > i,
+.token-hud .stealth-observer-exposure > i { font-size: 16px; }
+#token-hud .stealth-observer-exposure-bright > i,
+.token-hud .stealth-observer-exposure-bright > i { color: #f4d36e; }
+#token-hud .stealth-observer-exposure-dim > i,
+.token-hud .stealth-observer-exposure-dim > i { color: #d5bd83; }
+#token-hud .stealth-observer-exposure-dark > i,
+.token-hud .stealth-observer-exposure-dark > i { color: #b9a5f5; }
+#token-hud .stealth-observer-exposure-magical > i,
+.token-hud .stealth-observer-exposure-magical > i { color: #d18cff; }
+#token-hud .stealth-observer-exposure-unknown > i,
+.token-hud .stealth-observer-exposure-unknown > i { color: #b9c1c0; }
+
+/* Action HUD's native external-readout slot. */
+#action-hud-root .ahud-external-readouts {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  min-height: 0;
+  margin-top: 4px;
+}
+#action-hud-root .ahud-external-readouts:empty { display: none; }
+#action-hud-root .ahud-external-readout {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-width: 28px;
+  height: 23px;
+  padding: 2px 6px;
+  border: 1px solid rgba(117,190,177,.35);
+  border-radius: 5px;
+  color: var(--ahud-text, #e8eeee);
+  background: rgba(24,31,35,.76);
+  font-size: 12px;
+  line-height: 1;
+}
+#action-hud-root .ahud-external-readout i { font-size: 11px; }
+#action-hud-root .ahud-external-readout b { font-size: 12px; font-weight: 800; }
+#action-hud-root .stealth-observer-exposure-bright i { color: #f4d36e; }
+#action-hud-root .stealth-observer-exposure-dim i { color: #d5bd83; }
+#action-hud-root .stealth-observer-exposure-dark i { color: #b9a5f5; }
+#action-hud-root .stealth-observer-exposure-magical i { color: #d18cff; }
+#action-hud-root .stealth-observer-exposure-unknown i { color: #b9c1c0; }
